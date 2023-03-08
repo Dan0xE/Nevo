@@ -4,7 +4,7 @@ A simple tool that extracts snapshots from minecraft
 
 
 >**Warning**
-> This only works with Minecraft versions 1.18.2 and below
+> This only works with Minecraft versions 1.18.1 and below
 
 ---
 
