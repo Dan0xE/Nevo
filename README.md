@@ -28,5 +28,5 @@ This enables to play LAN multiplayer on one PC
 >**Warning**
 >This only works if the Snapshot User joins the User with the Original Copy, it will kick you the other way arround
 
-**Warning**
+>**Warning**
 >Currently you need to set the Powershell Script Execution Policy to unrestricted, otherwise the executable will not be able to load the powershell script (i am working on a fix for that by either using wmi directly or wrapping the command in something like "powershell -ExecutionPolicy Bypass -File p.ps1"
