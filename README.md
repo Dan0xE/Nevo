@@ -35,10 +35,7 @@ and launch the copied snapshot with the changed arguments.
 ## What is this for?
 You cannot launch two Instances of Minecraft on one PC and join a LAN world without getting the Error "Name already taken".
 
-<br>
 This Tool and changing the previous described parameters enables LAN multiplayer on one PC.
-<br>
-<br>
 
 ---
 
