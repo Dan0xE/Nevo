@@ -44,4 +44,4 @@ Sure, just follow the steps describes in [this video](https://www.youtube.com/wa
 
 ---
 
->If you encounter any issues, don't he hesitate to head over to the issue tab an open an issue about what you encountered!
+>If you encounter any issues, don't hesitate to head over to the issue tab an open an issue about what you encountered!
