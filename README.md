@@ -9,19 +9,18 @@ Nevo is a simple tool that extracts snapshots from minecraft
 ---
 
 ## How does this work?
-Minecraft spawns a new Java.exe process with arguments. <br>
-We collect these arguments and change certain parameters such as the path and the username. <br >
-Those are specified by these User
-
-Then we write these arguments back to a .bat file copy the Minecraft Snapshot to the specified location and launch it with the changed arguments
+We read the arguments that the Minecraft process spawns with, then we collect these arguments and change <br >
+certain parameters (such as the path and the username, the user can specify those in the UI). <br >
+Then we write these arguments back to a .bat file and copy the Minecraft Snapshot to the specified location <br >
+and launch the copied snapshot with the changed arguments. 
 
 ---
 
 ## What is this for?
-You cannot launch two Instances of Minecraft on one PC and join a LAN world without getting the Error "Name already taken"
+You cannot launch two Instances of Minecraft on one PC and join a LAN world without getting the Error "Name already taken".
 
 <br>
-This enables to play LAN multiplayer on one PC
+This Tool and changing the previous described parameters enables LAN multiplayer on one PC
 <br>
 <br>
 
