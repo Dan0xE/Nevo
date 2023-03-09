@@ -4,7 +4,7 @@ Nevo is a simple tool that extracts snapshots from Minecraft
 
 
 >**Warning**
-> This only works with Minecraft versions 1.18.1 and below
+> This only works with Minecraft versions 1.18.1 and below!
 
 ---
 
@@ -20,12 +20,12 @@ and launch the copied snapshot with the changed arguments.
 You cannot launch two Instances of Minecraft on one PC and join a LAN world without getting the Error "Name already taken".
 
 <br>
-This Tool and changing the previous described parameters enables LAN multiplayer on one PC
+This Tool and changing the previous described parameters enables LAN multiplayer on one PC.
 <br>
 <br>
 
 >**Warning**
->This only works if the Snapshot User joins the User with the Original Copy, the game will kick you if you do it the other way arround
+>This only works if the Snapshot User joins the User with the Original Copy, the game will kick you if you do it the other way arround.
 
 >**Warning**
->Currently you need to set the Powershell Script Execution Policy to unrestricted, otherwise the executable will not be able to load the powershell script (i am working on a fix for that by either using wmi directly or wrapping the command in something like "powershell -ExecutionPolicy Bypass -File p.ps1"
+>Currently you need to set the Powershell Script Execution Policy to unrestricted, otherwise the executable will not be able to load the powershell script (i am working on a fix for that by either using wmi directly or wrapping the command in something like "powershell -ExecutionPolicy Bypass -File p.ps1".
