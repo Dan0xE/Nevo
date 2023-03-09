@@ -1,6 +1,6 @@
 # Nevo
 
-Nevo is a simple tool that extracts snapshots from minecraft
+Nevo is a simple tool that extracts snapshots from Minecraft
 
 
 >**Warning**
