@@ -11,7 +11,6 @@ Nevo is a simple tool that extracts snapshots from Minecraft
 ## How can i use this?
 
 - Download the [Legacy Minecraft Launcher](https://launcher.mojang.com/download/MinecraftInstaller.msi) and select a Minecraft Version equal or below 1.18.1
-<br >
 - Then Launch the game, if the game window pops up launch the tool, specify a username and select <br >
 the path you want the snapshot to be copied to and then press "Launch Game"
 - A command window with all the arguments should open and a second instance of the should open
@@ -23,6 +22,7 @@ the path you want the snapshot to be copied to and then press "Launch Game"
 >**Warning**
 >Currently you need to set the Powershell Script Execution Policy to unrestricted, otherwise the executable will not be able to load the powershell script (i am working on a fix for that by either using wmi directly or wrapping the command in something like "powershell -ExecutionPolicy Bypass -File p.ps1".
 
+---
 
 ## How does the tool work?
 We read the arguments that the Minecraft process spawns with, then we collect these arguments and change <br >
@@ -40,5 +40,11 @@ This Tool and changing the previous described parameters enables LAN multiplayer
 <br>
 <br>
 
+---
+
 ## Can i do this manually?
 Sure, just follow the steps describes in [this video](https://www.youtube.com/watch?v=UNpvtNHUbCE)
+
+---
+
+>If you encounter any issues, don't he hesitate to head over to the issue tab an open an issue about what you encountered!
