@@ -6,8 +6,10 @@ function copy_files(old_path: string, new_path: string) {
     destination: new_path,
   })
     .then((res) => {
-      console.log("Copied files");
-      return res;
+      if (!res) {
+        console.error("Failed to copy files");
+        alert(`Failed to copy files`);
+      }
     })
     .catch((e) => {
       console.error("Failed to copy files: ", e);
@@ -23,7 +25,6 @@ export default function rewrite_args(username: string, path: string) {
         let args: string[] = res;
         args.shift();
         args.shift();
-        console.log(`Argument length is: ${args.length}`);
 
         for (let i = 0; i < args.length; i++) {
           if (args[i].includes("-Djava.library.path")) {
@@ -37,17 +38,14 @@ export default function rewrite_args(username: string, path: string) {
             old = old.substring(20);
 
             copy_files(old, path);
-            break;
-          }
-        }
 
-        for (let i = 0; i < args.length; i++) {
-          if (args[i].includes("--username")) {
-            if (username) {
-              args[i + 1] = username;
-              console.log(args[i + 1]);
-            } else {
-              alert("No username specified");
+            if (args[i].includes("--username")) {
+              if (username) {
+                args[i + 1] = username;
+                console.log(args[i + 1]);
+              } else {
+                alert("No username specified");
+              }
             }
           }
         }
