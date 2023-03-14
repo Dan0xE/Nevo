@@ -1,5 +1,12 @@
 import { invoke } from "@tauri-apps/api";
 
+function shiftArrary(arr: string[], count: number): string[] {
+  for (let i = 0; i < count; i++) {
+    arr.shift();
+  }
+  return arr;
+}
+
 function copy_files(old_path: string, new_path: string) {
   invoke("copy_snapshot_command", {
     origin: old_path,
@@ -20,11 +27,8 @@ function copy_files(old_path: string, new_path: string) {
 export default function rewrite_args(username: string, path: string) {
   invoke("generate_args_command").then((res) => {
     if (res) {
-      //@ts-ignore
-      invoke("read_args_command").then((res: string[]) => {
-        let args: string[] = res;
-        args.shift();
-        args.shift();
+      invoke("read_args_command").then((res) => {
+        let args = shiftArrary(res as string[], 2);
 
         for (let i = 0; i < args.length; i++) {
           if (args[i].includes("-Djava.library.path")) {

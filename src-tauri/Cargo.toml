@@ -10,6 +10,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
+windows = "0.10.0"
 tauri-build = { version = "1.2", features = [] }
 
 [dependencies]
@@ -19,6 +20,8 @@ serde_json = "1.0"
 powershell_script = "1.0.4"
 sysinfo = "0.25.1"
 wmi = "0.11.4"
+windows = "0.10.0"
+
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem

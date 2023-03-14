@@ -3,8 +3,8 @@ import { open } from "@tauri-apps/api/dialog";
 import rewrite_args from "./utils/rewrite_args";
 
 function App() {
-  const [name, setName] = useState("");
-  const [path, setPath] = useState("");
+  const [name, setName] = useState<string>("");
+  const [path, setPath] = useState<string>("");
 
   function handle_submit() {
     let profile = name.replace(/\s/g, "_");
@@ -15,6 +15,7 @@ function App() {
     } else {
       rewrite_args(profile, path);
     }
+
     console.log(path, name);
   }
 
@@ -36,8 +37,7 @@ function App() {
               directory: true,
             }).then((res) => {
               if (res) {
-                //@ts-ignore
-                setPath(res);
+                setPath(res as string);
               }
             });
           }}
