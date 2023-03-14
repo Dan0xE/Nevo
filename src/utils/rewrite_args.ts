@@ -1,5 +1,12 @@
 import { invoke } from "@tauri-apps/api";
 
+function shiftArrary(arr: string[], count: number): string[] {
+  for (let i = 0; i < count; i++) {
+    arr.shift();
+  }
+  return arr;
+}
+
 function copy_files(old_path: string, new_path: string) {
   invoke("copy_snapshot_command", {
     origin: old_path,
@@ -20,51 +27,55 @@ function copy_files(old_path: string, new_path: string) {
 export default function rewrite_args(username: string, path: string) {
   invoke("generate_args_command").then((res) => {
     if (res) {
-      //@ts-ignore
-      invoke("read_args_command").then((res: string[]) => {
-        let args: string[] = res;
-        args.shift();
-        args.shift();
+      setTimeout(() => {
+        invoke("read_args_command").then((res) => {
+          let args = shiftArrary(res as string[], 2);
 
-        for (let i = 0; i < args.length; i++) {
-          if (args[i].includes("-Djava.library.path")) {
-            let old = args[i];
-            args[i] = "-Djava.library.path=" + path;
-            let new_path_log = args[i];
-            console.log(args[i]);
-            console.log(`Original Path before modification is: ${old}`);
-            console.log(`New Path is ${new_path_log}`);
+          if (args.length < 3) {
+            alert("Failed to generate args");
+            return;
+          }
 
-            old = old.substring(20);
+          for (let i = 0; i < args.length; i++) {
+            if (args[i].includes("-Djava.library.path")) {
+              let old = args[i];
+              args[i] = "-Djava.library.path=" + path;
+              let new_path_log = args[i];
+              console.log(args[i]);
+              console.log(`Original Path before modification is: ${old}`);
+              console.log(`New Path is ${new_path_log}`);
 
-            copy_files(old, path);
+              old = old.substring(20);
 
-            if (args[i].includes("--username")) {
-              if (username) {
-                args[i + 1] = username;
-                console.log(args[i + 1]);
-              } else {
-                alert("No username specified");
+              copy_files(old, path);
+
+              if (args[i].includes("--username")) {
+                if (username) {
+                  args[i + 1] = username;
+                  console.log(args[i + 1]);
+                } else {
+                  alert("No username specified");
+                }
               }
             }
           }
-        }
 
-        let store = args.join(" ");
+          let store = args.join(" ");
 
-        console.log(store);
-        if (path) {
-          console.log(path);
-          invoke("write_args_command", {
-            args: store,
-            path: path,
-          }).then(() => {
-            invoke("launch_game_command");
-          });
-        } else {
-          alert("No path specified");
-        }
-      });
+          console.log(store);
+          if (path) {
+            console.log(path);
+            invoke("write_args_command", {
+              args: store,
+              path: path,
+            }).then(() => {
+              invoke("launch_game_command");
+            });
+          } else {
+            alert("No path specified");
+          }
+        });
+      }, 15000);
     } else {
       console.error("Failed to generate args");
       alert("failed to generate args, maybe you forgot to run minecraft?");

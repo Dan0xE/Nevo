@@ -10,6 +10,7 @@ use commands::{
 };
 
 mod utils {
+    pub(crate) mod argument_wrapper;
     pub(crate) mod copy_snapshot;
     pub(crate) mod generate_args;
     pub(crate) mod is_minecraft_running;
