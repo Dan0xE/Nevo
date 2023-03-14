@@ -9,8 +9,6 @@ use commands::{
     write_args_command::{__cmd__write_args_command, write_args_command},
 };
 
-use utils::argument_wrapper::argument_wrapper;
-
 mod utils {
     pub(crate) mod argument_wrapper;
     pub(crate) mod copy_snapshot;
@@ -30,7 +28,6 @@ mod commands {
 }
 
 fn main() {
-    argument_wrapper();
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
             write_args_command,
