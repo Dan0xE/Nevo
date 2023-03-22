@@ -5,12 +5,13 @@ import rewrite_args from "./utils/rewrite_args";
 function App() {
   const [name, setName] = useState<string>("");
   const [path, setPath] = useState<string>("");
+  const [createShortcut, setCreateShortcut] = useState<boolean>(false);
 
   function handle_submit() {
     let profile = name.replace(/\s/g, "_");
 
     if (path.length > 255 || path.includes(" ")) {
-      alert("Path is to long and cannot contain whitespaces");
+      alert("Invalid Path");
       return;
     } else {
       rewrite_args(profile, path);

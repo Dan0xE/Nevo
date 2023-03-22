@@ -15,16 +15,11 @@ pub(crate) fn generate_args() -> bool {
         std::fs::remove_file(args_bat_path).unwrap();
     }
 
-    if is_minecraft_running() {
-        if argument_wrapper() {
-            println!("Argument wrapper ran successfully");
-            true
-        } else {
-            println!("Argument wrapper failed");
-            false
-        }
+    if is_minecraft_running() && argument_wrapper() {
+        println!("minecraft is running & wrapper ran successfully");
+        true
     } else {
-        println!("Minecraft is not running");
+        println!("Argument wrapper failed to run or minecraft is not running");
         false
     }
 }

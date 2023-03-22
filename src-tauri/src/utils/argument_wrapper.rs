@@ -7,7 +7,7 @@ pub(crate) fn argument_wrapper() -> bool {
     let output = Command::new("powershell")
         .args(&[
             "-Executionpolicy", "bypass",
-            "-Command", &format!("cd \"{}\"; Start-Process powershell -Verb RunAs -ArgumentList '-Executionpolicy', 'bypass', '-Command', 'cd \"{}\"; Set-ExecutionPolicy bypass -Scope Process -Force; .\\p.ps1'", current_dir.display(), current_dir.display())
+            "-Command", &format!("if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {{ Start-Process PowerShell -Verb RunAs \"-NoProfile -ExecutionPolicy Bypass -Command 'cd $pwd; & '{}' '\" }}; $process = \"javaw.exe\"; Get-WmiObject Win32_Process -Filter \"name = '$process'\" | Select-Object CommandLine | % {{ $_ | Out-File -Width 10000 -FilePath '{}\\args.txt' -Encoding ascii -Append }}", env!("CARGO_MANIFEST_DIR"), current_dir.display())
         ])
         .output()
         .expect("Failed to execute PowerShell command");

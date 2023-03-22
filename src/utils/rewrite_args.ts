@@ -48,14 +48,16 @@ export default function rewrite_args(username: string, path: string) {
               old = old.substring(20);
 
               copy_files(old, path);
+            }
+          }
 
-              if (args[i].includes("--username")) {
-                if (username) {
-                  args[i + 1] = username;
-                  console.log(args[i + 1]);
-                } else {
-                  alert("No username specified");
-                }
+          for (let i = 0; i < args.length; i++) {
+            if (args[i].includes("--username")) {
+              if (username) {
+                args[i + 1] = username;
+                console.log(args[i + 1]);
+              } else {
+                alert("No username specified");
               }
             }
           }
