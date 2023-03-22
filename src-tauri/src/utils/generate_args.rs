@@ -1,5 +1,7 @@
 use std::env::current_dir;
 
+use crate::utils::create_shortcut::create_symlimk;
+
 use super::{argument_wrapper::argument_wrapper, is_minecraft_running::is_minecraft_running};
 
 pub(crate) fn generate_args() -> bool {
