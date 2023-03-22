@@ -1429,6 +1429,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "nevo"
+version = "0.0.2"
+dependencies = [
+ "serde",
+ "serde_json",
+ "sysinfo",
+ "tauri",
+ "tauri-build",
+ "windows 0.10.0",
+]
+
+[[package]]
 name = "new_debug_unreachable"
 version = "1.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2276,18 +2288,6 @@ name = "smallvec"
 version = "1.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a507befe795404456341dfab10cef66ead4c041f62b8b11bbb92bffe5d0953e0"
-
-[[package]]
-name = "snapshot_grabber"
-version = "0.0.1"
-dependencies = [
- "serde",
- "serde_json",
- "sysinfo",
- "tauri",
- "tauri-build",
- "windows 0.10.0",
-]
 
 [[package]]
 name = "soup2"
