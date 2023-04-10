@@ -24,11 +24,11 @@ function copy_files(old_path: string, new_path: string) {
     });
 }
 
-export default function rewrite_args(username: string, path: string) {
+export default async function rewrite_args(username: string, path: string) {
   invoke("generate_args_command").then((res) => {
     if (res) {
       invoke("read_args_command").then((res) => {
-        let args = shiftArrary(res as string[], 2);
+        let args: string[] = shiftArrary(res as string[], 2);
 
         if (args.length < 3) {
           alert("Failed to generate args");
@@ -63,9 +63,7 @@ export default function rewrite_args(username: string, path: string) {
 
         let store = args.join(" ");
 
-        console.log(store);
         if (path) {
-          console.log(path);
           invoke("write_args_command", {
             args: store,
             path: path,

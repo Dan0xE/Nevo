@@ -2,7 +2,7 @@ use std::fs;
 use std::io;
 use std::path::Path;
 
-fn copy_files(source: &str, destination: &str) -> io::Result<()> {
+pub(crate) fn copy_snapshot(source: &str, destination: &str) -> io::Result<()> {
     let source_path = Path::new(source);
     let destination_path = Path::new(destination);
 
@@ -23,33 +23,24 @@ fn copy_files(source: &str, destination: &str) -> io::Result<()> {
             let destination_file = destination_path.join(entry.file_name());
 
             // Copy the file to destination
-            fs::copy(&entry_path, &destination_file)
-                .map_err(|e| {
-                    if e.kind() == io::ErrorKind::AlreadyExists {
+            match fs::copy(&entry_path, &destination_file) {
+                Ok(_) => {
+                    println!("File copied successfully.");
+                }
+                Err(e) => match e.kind() {
+                    io::ErrorKind::AlreadyExists => {
                         println!("File already exists, overwriting...");
                         fs::remove_file(&destination_file)?;
                         fs::copy(entry_path, destination_file)?;
-                        Ok(())
-                    } else {
-                        Err(e)
+                        println!("File overwritten successfully.");
                     }
-                })
-                .unwrap();
+                    _ => {
+                        eprintln!("An error occurred: {:?}", e);
+                    }
+                },
+            }
         }
     }
 
     Ok(())
-}
-
-pub(crate) fn copy_snapshot(origin: String, destination: String) -> bool {
-    match copy_files(&origin, &destination) {
-        Ok(_) => {
-            println!("Copied files");
-            true
-        }
-        Err(e) => {
-            eprintln!("Could not copy files: {}", e);
-            false
-        }
-    }
 }
