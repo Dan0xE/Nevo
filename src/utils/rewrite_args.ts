@@ -24,7 +24,7 @@ function copy_files(old_path: string, new_path: string) {
     });
 }
 
-export default async function rewrite_args(username: string, path: string) {
+export default function rewrite_args(username: string, path: string) {
   invoke("generate_args_command").then((res) => {
     if (res) {
       invoke("read_args_command").then((res) => {
