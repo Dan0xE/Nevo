@@ -4,21 +4,22 @@ use std::{
     path::{self},
 };
 
-pub(crate) fn read_args() -> Vec<String> {
+pub(crate) fn read_args() -> Result<Vec<String>, String> {
     if path::Path::new("args.txt").exists() {
-        println!("file exists");
+        println!("args.txt file exists");
 
         let mut args = Vec::new();
         let mut file = fs::File::open("args.txt").unwrap();
+
         let mut contents = String::new();
+
         file.read_to_string(&mut contents).unwrap();
+
         for arg in contents.split_whitespace() {
             args.push(arg.to_string())
         }
-        args
+        Ok(args)
     } else {
-        let mut result = Vec::new();
-        result.push("File not found".to_string());
-        result
+        return Err("Failed to open file".to_string());
     }
 }

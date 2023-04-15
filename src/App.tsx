@@ -16,8 +16,6 @@ function App() {
     } else {
       rewrite_args(profile, path);
     }
-
-    console.log(path, name);
   }
 
   return (

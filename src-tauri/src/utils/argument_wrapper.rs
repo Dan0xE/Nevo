@@ -1,8 +1,8 @@
-use std::env;
 use std::process::Command;
+use std::{env, io};
 
-pub(crate) fn argument_wrapper() -> bool {
-    let current_dir = env::current_dir().expect("Failed to get current directory");
+pub(crate) fn argument_wrapper() -> io::Result<()> {
+    let current_dir = env::current_dir().unwrap();
 
     let output = Command::new("powershell")
         .args(&[
@@ -12,8 +12,15 @@ pub(crate) fn argument_wrapper() -> bool {
         .output()
         .expect("Failed to execute PowerShell command");
 
-    match output.status.success() {
-        true => true,
-        false => false,
+    if output.status.success() {
+        println!("Successfully executed PowerShell command");
+    } else {
+        println!("Failed to execute PowerShell command");
+        return Err(io::Error::new(
+            io::ErrorKind::Other,
+            "Failed to execute PowerShell command",
+        ));
     }
+
+    Ok(())
 }

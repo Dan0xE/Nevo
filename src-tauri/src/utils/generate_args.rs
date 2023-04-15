@@ -1,10 +1,8 @@
 use std::env::current_dir;
 
-use crate::utils::create_shortcut::create_symlimk;
-
 use super::{argument_wrapper::argument_wrapper, is_minecraft_running::is_minecraft_running};
 
-pub(crate) fn generate_args() -> bool {
+pub(crate) fn generate_args() -> Result<String, String> {
     let current_dir = current_dir().unwrap_or_default();
 
     let args_txt_path = current_dir.join("args.txt");
@@ -17,11 +15,12 @@ pub(crate) fn generate_args() -> bool {
         std::fs::remove_file(args_bat_path).unwrap();
     }
 
-    if is_minecraft_running() && argument_wrapper() {
+    if is_minecraft_running() && argument_wrapper().is_ok() {
         println!("minecraft is running & wrapper ran successfully");
-        true
+        Ok::<String, String>("sucess".to_string()).unwrap();
     } else {
         println!("Argument wrapper failed to run or minecraft is not running");
-        false
+        return Err::<String, String>("Failed to generate arguments, read the log".to_string());
     }
+    Ok("sucess".to_string())
 }

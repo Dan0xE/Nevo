@@ -13,25 +13,31 @@ function copy_files(old_path: string, new_path: string) {
     destination: new_path,
   })
     .then((res) => {
-      if (!res) {
-        console.error("Failed to copy files");
-        alert(`Failed to copy files`);
+      //we return a string instead of bool now!
+      if (res !== "sucess") {
+        console.error(`Failed to copy files:\n${res}`);
+        alert(`Failed to copy files:\n${res}`);
       }
     })
     .catch((e) => {
-      console.error("Failed to copy files: ", e);
-      alert(`Failed to copy files`);
+      console.error(`Failed to copy files:\n${e}`);
+      alert(`Failed to copy files:\n${e}`);
     });
 }
 
 export default function rewrite_args(username: string, path: string) {
   invoke("generate_args_command").then((res) => {
-    if (res) {
-      invoke("read_args_command").then((res) => {
-        let args = shiftArrary(res as string[], 2);
-
+    if (res !== "sucess") {
+      console.error(`Failed to generate args:\n${res}`);
+      alert(`Failed to generate args:\n${res}`);
+      return;
+    }
+    invoke("read_args_command")
+      .then((res) => {
+        let args: string[] = shiftArrary(res as string[], 2);
         if (args.length < 3) {
-          alert("Failed to generate args");
+          console.error(`Failed to read args.txt\n${res}`);
+          alert(`Failed to read args.txt\n${res}`);
           return;
         }
 
@@ -40,9 +46,6 @@ export default function rewrite_args(username: string, path: string) {
             let old = args[i];
             args[i] = "-Djava.library.path=" + path;
             let new_path_log = args[i];
-            console.log(args[i]);
-            console.log(`Original Path before modification is: ${old}`);
-            console.log(`New Path is ${new_path_log}`);
 
             old = old.substring(20);
 
@@ -54,8 +57,8 @@ export default function rewrite_args(username: string, path: string) {
           if (args[i].includes("--username")) {
             if (username) {
               args[i + 1] = username;
-              console.log(args[i + 1]);
             } else {
+              console.error(`No username specified`);
               alert("No username specified");
             }
           }
@@ -63,22 +66,38 @@ export default function rewrite_args(username: string, path: string) {
 
         let store = args.join(" ");
 
-        console.log(store);
         if (path) {
-          console.log(path);
           invoke("write_args_command", {
             args: store,
             path: path,
-          }).then(() => {
-            invoke("launch_game_command");
-          });
+          })
+            .then((res) => {
+              if (res !== "sucess") {
+                console.error(`Failed to write args:\n${res}`);
+                alert(`Failed to write args:\n${res}`);
+                return;
+              }
+              console;
+              invoke("launch_game_command").then((res) => {
+                if (res !== "sucess") {
+                  console.error(`Failed to launch game:\n${res}`);
+                  alert(`Failed to launch game:\n${res}`);
+                  return;
+                }
+              });
+            })
+            .catch((e) => {
+              alert(`Error while launching the game:\n${e}`);
+              console.error(`Error while launching game\n${e}`);
+            });
         } else {
+          console.error(`No path specified`);
           alert("No path specified");
         }
+      })
+      .catch((e) => {
+        console.error(`Failed to read args:\n${e}`);
+        alert(`Failed to read args:\n${e}`);
       });
-    } else {
-      console.error("Failed to generate args");
-      alert("failed to generate args, maybe you forgot to run minecraft?");
-    }
   });
 }
