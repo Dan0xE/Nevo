@@ -12,6 +12,10 @@ use commands::{
 #[cfg(test)]
 mod tests {
     mod copy_snapshot_test;
+    mod generate_args_test;
+    mod launch_game_test;
+    mod read_argument_test;
+    mod write_args_test;
 }
 
 mod utils {

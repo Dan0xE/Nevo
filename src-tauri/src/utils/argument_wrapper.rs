@@ -2,7 +2,7 @@ use std::process::Command;
 use std::{env, io};
 
 pub(crate) fn argument_wrapper() -> io::Result<()> {
-    let current_dir = env::current_dir().expect("Failed to get current directory");
+    let current_dir = env::current_dir().unwrap();
 
     let output = Command::new("powershell")
         .args(&[

@@ -1,10 +1,10 @@
 use std::{
     fs,
-    io::{self, Read},
+    io::Read,
     path::{self},
 };
 
-pub(crate) fn read_args() -> Result<Vec<String>, io::Error> {
+pub(crate) fn read_args() -> Result<Vec<String>, String> {
     if path::Path::new("args.txt").exists() {
         println!("args.txt file exists");
 
@@ -20,8 +20,6 @@ pub(crate) fn read_args() -> Result<Vec<String>, io::Error> {
         }
         Ok(args)
     } else {
-        let mut result = Vec::new();
-        result.push("File not found".to_string());
-        Ok(result)
+        return Err("Failed to open file".to_string());
     }
 }
