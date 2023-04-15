@@ -36,11 +36,11 @@ pub(crate) fn copy_snapshot(source: &str, destination: &str) -> io::Result<()> {
                     }
                     _ => {
                         eprintln!("An error occurred: {:?}", e);
+                        return Err(e);
                     }
                 },
             }
         }
     }
-
     Ok(())
 }

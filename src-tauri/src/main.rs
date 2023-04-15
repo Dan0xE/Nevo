@@ -5,9 +5,14 @@ use commands::{
     copy_snapshot_command::{__cmd__copy_snapshot_command, copy_snapshot_command},
     generate_args_command::{__cmd__generate_args_command, generate_args_command},
     lauch_game_command::{__cmd__launch_game_command, launch_game_command},
-    read_args_command::{__cmd__read_args_command, read_args_command},
+    read_args_command::read_args_command,
     write_args_command::{__cmd__write_args_command, write_args_command},
 };
+
+#[cfg(test)]
+mod tests {
+    mod copy_snapshot_test;
+}
 
 mod utils {
     pub(crate) mod argument_wrapper;
@@ -35,7 +40,7 @@ fn main() {
             read_args_command,
             copy_snapshot_command,
             launch_game_command,
-            generate_args_command
+            generate_args_command,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

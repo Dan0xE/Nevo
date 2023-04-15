@@ -1,16 +1,15 @@
 use crate::utils::copy_snapshot::copy_snapshot;
 
-//TODO doesnt really return an indicator of failure
 #[tauri::command]
-pub(crate) fn copy_snapshot_command(origin: String, destination: String) -> bool {
+pub(crate) fn copy_snapshot_command(origin: String, destination: String) -> String {
     match copy_snapshot(&origin, &destination) {
         Ok(_) => {
             println!("Copied Snapshot");
-            return true;
+            return "sucess".to_string();
         }
         Err(e) => {
             println!("Failed to copy: {:?}", e);
-            return false;
+            return e.to_string();
         }
     };
 }
