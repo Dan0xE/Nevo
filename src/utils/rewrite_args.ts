@@ -42,7 +42,6 @@ export default function rewrite_args(username: string, path: string) {
         }
 
         let newVersion = false;
-
         for (let i = 0; i < args.length; i++) {
           if (args[i].includes("--version")) {
             let versionString = args[i + 1];
@@ -54,24 +53,14 @@ export default function rewrite_args(username: string, path: string) {
             if (version > 1.181) {
               newVersion = true;
             }
-          }
-        }
+          } else if (!newVersion && args[i].includes("-Djava.library.path")) {
+            let old = args[i];
+            args[i] = "-Djava.library.path=" + path;
 
-        if (!newVersion) {
-          for (let i = 0; i < args.length; i++) {
-            if (args[i].includes("-Djava.library.path")) {
-              let old = args[i];
-              args[i] = "-Djava.library.path=" + path;
+            old = old.substring(20);
 
-              old = old.substring(20);
-
-              copy_files(old, path);
-            }
-          }
-        }
-
-        for (let i = 0; i < args.length; i++) {
-          if (args[i].includes("--username")) {
+            copy_files(old, path);
+          } else if (args[i].includes("--username")) {
             if (username) {
               args[i + 1] = username;
             } else {
