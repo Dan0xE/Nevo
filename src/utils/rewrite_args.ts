@@ -13,7 +13,6 @@ function copy_files(old_path: string, new_path: string) {
     destination: new_path,
   })
     .then((res) => {
-      //we return a string instead of bool now!
       if (res !== "sucess") {
         console.error(`Failed to copy files:\n${res}`);
         alert(`Failed to copy files:\n${res}`);
@@ -35,21 +34,39 @@ export default function rewrite_args(username: string, path: string) {
     invoke("read_args_command")
       .then((res) => {
         let args: string[] = shiftArrary(res as string[], 2);
+        console.log(args);
         if (args.length < 3) {
           console.error(`Failed to read args.txt\n${res}`);
           alert(`Failed to read args.txt\n${res}`);
           return;
         }
 
+        let newVersion = false;
+
         for (let i = 0; i < args.length; i++) {
-          if (args[i].includes("-Djava.library.path")) {
-            let old = args[i];
-            args[i] = "-Djava.library.path=" + path;
-            let new_path_log = args[i];
+          if (args[i].includes("--version")) {
+            let versionString = args[i + 1];
+            console.log(versionString);
+            let parseVersion = versionString.replace(/\./g, "");
+            console.log(parseVersion);
+            let version = parseFloat(parseVersion);
 
-            old = old.substring(20);
+            if (version > 1.181) {
+              newVersion = true;
+            }
+          }
+        }
 
-            copy_files(old, path);
+        if (!newVersion) {
+          for (let i = 0; i < args.length; i++) {
+            if (args[i].includes("-Djava.library.path")) {
+              let old = args[i];
+              args[i] = "-Djava.library.path=" + path;
+
+              old = old.substring(20);
+
+              copy_files(old, path);
+            }
           }
         }
 
