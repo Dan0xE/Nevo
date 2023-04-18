@@ -47,5 +47,5 @@ fn main() {
             generate_args_command,
         ])
         .run(tauri::generate_context!())
-        .expect("error while running tauri application");
+        .expect("error while running nevo");
 }
