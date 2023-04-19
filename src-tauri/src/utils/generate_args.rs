@@ -3,7 +3,7 @@ use std::env::current_dir;
 use super::{argument_wrapper::argument_wrapper, is_minecraft_running::is_minecraft_running};
 
 pub(crate) fn generate_args() -> Result<String, String> {
-    let current_dir = current_dir().unwrap_or_default();
+    let current_dir = current_dir().unwrap();
 
     let args_txt_path = current_dir.join("args.txt");
     let args_bat_path = current_dir.join("args.bat");
