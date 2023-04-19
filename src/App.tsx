@@ -20,7 +20,6 @@ function App() {
   return (
     <div className="container">
       <p>Nevo</p>
-
       <div className="row">
         <input
           id="greet-input"
