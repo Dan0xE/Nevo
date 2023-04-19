@@ -5,7 +5,6 @@ import rewrite_args from "./utils/rewrite_args";
 function App() {
   const [name, setName] = useState<string>("");
   const [path, setPath] = useState<string>("");
-  const [createShortcut, setCreateShortcut] = useState<boolean>(false);
 
   function handle_submit() {
     let profile = name.replace(/\s/g, "_");
@@ -20,8 +19,7 @@ function App() {
 
   return (
     <div className="container">
-      <p>Snapshot Grabber</p>
-
+      <p>Nevo</p>
       <div className="row">
         <input
           id="greet-input"

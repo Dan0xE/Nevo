@@ -11,7 +11,6 @@ fn copy_snapshot_fail_not_a_directory() {
 
 #[test]
 fn copy_snapshot_sucess() {
-    //checking if it copies contents of a folder to another sucessfully
     fs::create_dir_all("test").unwrap();
     fs::create_dir_all("test_dest").unwrap();
     File::create("test\\foo.txt").unwrap();

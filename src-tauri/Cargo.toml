@@ -10,14 +10,18 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
-windows = "0.10.0"
 tauri-build = { version = "1.2", features = [] }
 
 [dependencies]
 tauri = { version = "1.2", features = ["dialog-all", "shell-open"] }
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
 sysinfo = "0.28.2"
+
+[profile.release]
+opt-level = 'z'     # Optimize for size
+lto = true          # Enable link-time optimization
+codegen-units = 1   # Reduce number of codegen units to increase optimizations
+panic = 'abort'     # Abort on panic
+strip = true
 
 
 [features]

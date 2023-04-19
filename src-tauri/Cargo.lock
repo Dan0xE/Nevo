@@ -284,12 +284,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "const-sha1"
-version = "0.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fb58b6451e8c2a812ad979ed1d83378caa5e927eef2622017a45f251457c2c9d"
-
-[[package]]
 name = "convert_case"
 version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1432,12 +1426,9 @@ dependencies = [
 name = "nevo"
 version = "0.1.0"
 dependencies = [
- "serde",
- "serde_json",
  "sysinfo",
  "tauri",
  "tauri-build",
- "windows 0.10.0",
 ]
 
 [[package]]
@@ -3165,17 +3156,6 @@ checksum = "712e227841d057c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f"
 
 [[package]]
 name = "windows"
-version = "0.10.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a43e544233e20425d5a58e9671cf76d6aed9e6f211508c050facb29b188dc10f"
-dependencies = [
- "const-sha1",
- "windows_gen",
- "windows_macros",
-]
-
-[[package]]
-name = "windows"
 version = "0.37.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "57b543186b344cc61c85b5aab0d2e3adf4e0f99bc076eff9aa5927bcc0b8a647"
@@ -3306,12 +3286,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4c8b1b673ffc16c47a9ff48570a9d85e25d265735c503681332589af6253c6c7"
 
 [[package]]
-name = "windows_gen"
-version = "0.10.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bc6283570a39b3594e31c64a498f48058758cc063eb087d972bb6476ad134a16"
-
-[[package]]
 name = "windows_i686_gnu"
 version = "0.37.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3346,16 +3320,6 @@ name = "windows_i686_msvc"
 version = "0.42.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bf4d1122317eddd6ff351aa852118a2418ad4214e6613a50e0191f7004372605"
-
-[[package]]
-name = "windows_macros"
-version = "0.10.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f757e7665f81f33ace9f89b0f0fc3a7c770e24ff4fa1475c6503bb35b4524893"
-dependencies = [
- "syn",
- "windows_gen",
-]
 
 [[package]]
 name = "windows_x86_64_gnu"
