@@ -39,7 +39,7 @@ function App() {
             });
           }}
         >
-          Select Path
+          Select Path (optional)
         </button>
         <button
           onClick={(e) => {
