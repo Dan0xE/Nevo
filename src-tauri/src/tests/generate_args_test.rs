@@ -1,11 +1,10 @@
 use crate::{
-    commands::generate_args_command::generate_args_command,
-    utils::is_minecraft_running::is_minecraft_running,
+    utils::generate_args::generate_args, utils::is_minecraft_running::is_minecraft_running,
 };
 
 #[test]
 fn generate_args_failure() {
-    let result = generate_args_command();
+    let result = generate_args();
     assert!(result.is_err());
 }
 
@@ -19,6 +18,6 @@ fn generate_args_sucess() {
         std::thread::sleep(std::time::Duration::from_secs(5))
     }
 
-    let result = generate_args_command();
+    let result = generate_args();
     assert!(result.is_ok());
 }

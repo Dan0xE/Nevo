@@ -3,6 +3,7 @@ use std::io;
 use std::path::Path;
 
 pub(crate) fn copy_snapshot(source: &str, destination: &str) -> io::Result<()> {
+    println!("source: {:?}\ndestination: {:?}", source, destination);
     let source_path = Path::new(source);
     let destination_path = Path::new(destination);
 

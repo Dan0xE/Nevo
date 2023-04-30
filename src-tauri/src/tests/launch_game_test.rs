@@ -4,7 +4,7 @@ use std::{
     time::Duration,
 };
 
-use crate::commands::lauch_game_command::launch_game_command;
+use crate::utils::launch_game::launch_game;
 
 #[test]
 fn launch_game_failure_no_bat_file() {
@@ -13,7 +13,7 @@ fn launch_game_failure_no_bat_file() {
         fs::remove_file("args.bat").unwrap();
     }
 
-    let result = launch_game_command();
+    let result = launch_game();
     assert!(result.is_err());
     std::thread::sleep(Duration::from_secs(2))
 }
@@ -25,6 +25,6 @@ fn launch_game_sucess() {
     std::thread::sleep(Duration::from_secs(2));
     fs::write("args.bat", "echo hello").unwrap();
 
-    let result = launch_game_command();
+    let result = launch_game();
     assert!(result.is_ok());
 }

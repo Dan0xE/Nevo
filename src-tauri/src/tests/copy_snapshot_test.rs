@@ -1,11 +1,10 @@
 use std::fs::{self, File};
 
-use crate::commands::copy_snapshot_command::copy_snapshot_command;
+use crate::utils::copy_snapshot::copy_snapshot;
 
 #[test]
 fn copy_snapshot_fail_not_a_directory() {
-    //checking proper error handling
-    let result = copy_snapshot_command("non_existant".to_string(), "non_existant".to_string());
+    let result = copy_snapshot("non_existant", "non_existant");
     assert!(result.is_err());
 }
 
@@ -15,7 +14,7 @@ fn copy_snapshot_sucess() {
     fs::create_dir_all("test_dest").unwrap();
     File::create("test\\foo.txt").unwrap();
 
-    let result = copy_snapshot_command("test".to_string(), "test_dest".to_string());
+    let result = copy_snapshot("test", "test_dest");
     assert!(result.is_ok());
 
     //cleanup
