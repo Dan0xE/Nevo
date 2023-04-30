@@ -20,7 +20,7 @@ pub(crate) fn generate_args() -> Result<String, String> {
         Ok::<String, String>("sucess".to_string()).unwrap();
     } else {
         println!("Argument wrapper failed to run or minecraft is not running");
-        return Err::<String, String>("Failed to generate arguments, read the log".to_string());
+        return Err::<String, String>("Failed to generate arguments".to_string());
     }
     Ok("sucess".to_string())
 }

@@ -1,6 +1,6 @@
 [package]
 name = "nevo"
-version = "0.2.0"
+version = "0.3.0"
 description = "grabs the generated minecraft snapshot"
 authors = ["dan0xe"]
 license = "MIT"
