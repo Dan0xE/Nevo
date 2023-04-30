@@ -6,7 +6,7 @@ use super::{
 
 use std::error::Error;
 
-fn rewrite_args(username: String, path: String) -> Result<(), Box<dyn Error>> {
+pub(crate) fn rewrite_args(username: String, path: String) -> Result<(), Box<dyn Error>> {
     generate_args()?;
     let res = read_args()?;
     let mut args: Vec<String> = shift_array(res, 2);
@@ -17,7 +17,7 @@ fn rewrite_args(username: String, path: String) -> Result<(), Box<dyn Error>> {
         .replace(".", "")
         .parse::<f64>()
         .unwrap()
-        < 1181.0
+        > 1181.0
     {
         new_version = true;
     }

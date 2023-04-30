@@ -4,7 +4,7 @@ use std::{
     time::Duration,
 };
 
-use crate::commands::read_args_command::read_args_command;
+use crate::utils::read_arguments::read_args;
 
 #[test]
 fn read_argument_fail_file_does_not_exist() {
@@ -12,7 +12,7 @@ fn read_argument_fail_file_does_not_exist() {
     if Path::new("args.txt").exists() {
         fs::remove_file("args.bat").unwrap();
     }
-    let result = read_args_command();
+    let result = read_args();
     assert!(result.is_err());
 }
 
@@ -20,7 +20,7 @@ fn read_argument_fail_file_does_not_exist() {
 fn read_arguments_sucess() {
     std::thread::sleep(Duration::from_secs(6));
     File::create("args.txt").unwrap();
-    let result = read_args_command();
+    let result = read_args();
     assert!(result.is_ok());
 
     //cleanup

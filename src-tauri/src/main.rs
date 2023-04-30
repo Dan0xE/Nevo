@@ -1,13 +1,7 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use commands::{
-    copy_snapshot_command::{__cmd__copy_snapshot_command, copy_snapshot_command},
-    generate_args_command::{__cmd__generate_args_command, generate_args_command},
-    lauch_game_command::{__cmd__launch_game_command, launch_game_command},
-    read_args_command::read_args_command,
-    write_args_command::{__cmd__write_args_command, write_args_command},
-};
+use commands::rewrite_args_command::{__cmd__rewrite_args_command, rewrite_args_command};
 
 #[cfg(test)]
 mod tests {
@@ -32,22 +26,13 @@ mod utils {
 }
 
 mod commands {
-    pub(crate) mod copy_snapshot_command;
-    pub(crate) mod generate_args_command;
-    pub(crate) mod lauch_game_command;
-    pub(crate) mod read_args_command;
-    pub(crate) mod write_args_command;
+
+    pub(crate) mod rewrite_args_command;
 }
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![
-            write_args_command,
-            read_args_command,
-            copy_snapshot_command,
-            launch_game_command,
-            generate_args_command,
-        ])
+        .invoke_handler(tauri::generate_handler![rewrite_args_command])
         .run(tauri::generate_context!())
         .expect("error while running nevo");
 }

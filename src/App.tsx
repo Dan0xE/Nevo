@@ -1,20 +1,22 @@
 import { useState } from "react";
 import { open } from "@tauri-apps/api/dialog";
-import rewrite_args from "./utils/rewrite_args";
-import log from "./utils/log";
+import { invoke } from "@tauri-apps/api";
 
 function App() {
   const [name, setName] = useState<string>("");
   const [path, setPath] = useState<string>("");
 
   function handle_submit() {
-    let profile = name.replace(/\s/g, "_");
+    let profileName = name.replace(/\s/g, "_");
 
     if (path.length > 255 || path.includes(" ")) {
-      log("invalid path", "error");
+      alert("invalid path\npath must not contain whitespaces");
       return;
     } else {
-      rewrite_args(profile, path);
+      invoke("rewrite_args_command", {
+        username: profileName,
+        path: path,
+      }).catch((e) => alert(e));
     }
   }
 
