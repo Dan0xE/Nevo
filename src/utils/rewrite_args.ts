@@ -1,6 +1,7 @@
 import { invoke } from "@tauri-apps/api";
 import { shiftArrary } from "./shift_array";
 import { copy_files } from "./copy_files";
+import log from "./log";
 
 export default function rewrite_args(username: string, path: string) {
   invoke("generate_args_command")
@@ -27,7 +28,7 @@ export default function rewrite_args(username: string, path: string) {
           if (username) {
             args[i + 1] = username;
           } else {
-            alert("No username specified");
+            log("no username specified", "error");
           }
         }
       }
@@ -40,7 +41,6 @@ export default function rewrite_args(username: string, path: string) {
       return invoke("launch_game_command");
     })
     .catch((error) => {
-      console.error(`Error:\n${error}`);
-      alert(`Error:\n${error}`);
+      log(`Error:\n${error}`, "error");
     });
 }

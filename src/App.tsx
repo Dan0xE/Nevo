@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { open } from "@tauri-apps/api/dialog";
 import rewrite_args from "./utils/rewrite_args";
+import log from "./utils/log";
 
 function App() {
   const [name, setName] = useState<string>("");
@@ -10,7 +11,7 @@ function App() {
     let profile = name.replace(/\s/g, "_");
 
     if (path.length > 255 || path.includes(" ")) {
-      alert("Invalid Path");
+      log("invalid path", "error");
       return;
     } else {
       rewrite_args(profile, path);

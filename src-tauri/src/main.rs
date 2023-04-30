@@ -26,6 +26,8 @@ mod utils {
     pub(crate) mod is_minecraft_running;
     pub(crate) mod launch_game;
     pub(crate) mod read_arguments;
+    pub(crate) mod rewrite_args;
+    pub(crate) mod shift_array;
     pub(crate) mod write_arguments;
 }
 

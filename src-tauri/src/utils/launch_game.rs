@@ -17,7 +17,7 @@ pub(crate) fn launch_game() -> Result<String, String> {
 
         create_symlimk(&arg_buf_str, &desktop_dir, "nevo_shortcut").unwrap_or_else(|e| {
             println!("Error creating shortcut: {}", e);
-            Err::<String, String>("Failed to create Symlink".to_string()).unwrap();
+            Err::<String, String>(format!("Failed to create Symlink: {:?}", e)).unwrap();
         });
 
         match Command::new("cmd")

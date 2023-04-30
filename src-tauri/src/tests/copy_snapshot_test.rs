@@ -4,7 +4,6 @@ use crate::commands::copy_snapshot_command::copy_snapshot_command;
 
 #[test]
 fn copy_snapshot_fail_not_a_directory() {
-    //checking proper error handling
     let result = copy_snapshot_command("non_existant".to_string(), "non_existant".to_string());
     assert!(result.is_err());
 }
