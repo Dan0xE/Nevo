@@ -7,16 +7,20 @@ function App() {
   const [path, setPath] = useState<string>("");
 
   function handle_submit() {
-    let profileName = name.replace(/\s/g, "_");
+    if (name) {
+      let profileName = name.replace(/\s/g, "_");
 
-    if (path.length > 255 || path.includes(" ")) {
-      alert("invalid path\npath must not contain whitespaces");
-      return;
+      if (path.length > 255 || path.includes(" ")) {
+        alert("invalid path\npath must not contain whitespaces");
+        return;
+      } else {
+        invoke("rewrite_args_command", {
+          username: profileName,
+          path: path,
+        }).catch((e) => alert(e));
+      }
     } else {
-      invoke("rewrite_args_command", {
-        username: profileName,
-        path: path,
-      }).catch((e) => alert(e));
+      alert("No name has been specified");
     }
   }
 
