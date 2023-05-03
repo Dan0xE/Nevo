@@ -8,7 +8,7 @@ pub(crate) fn rewrite_args_command(username: String, path: String) -> Result<Str
             return Ok::<String, String>("sucess".to_string());
         }
         Err(e) => {
-            println!("Something went wrong: {:?}", e);
+            println!("Something went wrong:\n{:?}", e);
             return Err::<String, String>(e.to_string());
         }
     };

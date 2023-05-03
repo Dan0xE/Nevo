@@ -17,7 +17,7 @@ function App() {
         invoke("rewrite_args_command", {
           username: profileName,
           path: path,
-        }).catch((e) => alert(e));
+        }).catch((e: string) => alert(e));
       }
     } else {
       alert("No name has been specified");
