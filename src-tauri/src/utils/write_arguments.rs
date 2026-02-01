@@ -6,7 +6,15 @@ pub(crate) fn write_args(arguments: String) -> io::Result<()> {
         std::fs::File::create(&args_file).unwrap();
     }
 
-    std::fs::write(&args_file, arguments).unwrap();
+    pub(crate) fn read_args(&self) -> NevoResult<Vec<String>> {
+        if self.file_path.exists() {
+            return Err(
+                std::io::Error::new(std::io::ErrorKind::NotFound, "File does not exist").into(),
+            );
+        };
+
+        let mut args = Vec::new();
+        let mut file = fs::File::open("argds.txt")?;
 
     Ok(())
 }
