@@ -14,7 +14,7 @@ function App() {
         alert("invalid path\npath must not contain whitespaces");
         return;
       } else {
-        invoke("rewrite_args_command", {
+        invoke("start_snapshot", {
           username: profileName,
           path: path,
         }).catch((e: string) => alert(e));

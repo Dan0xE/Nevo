@@ -1,6 +1,6 @@
 use std::fs::{self, File};
 
-use crate::utils::copy_snapshot::copy_snapshot;
+use crate::copy_snapshot;
 
 #[test]
 fn copy_snapshot_fail_not_a_directory() {
