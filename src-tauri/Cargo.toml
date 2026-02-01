@@ -13,8 +13,10 @@ edition = "2021"
 tauri-build = { version = "1.2", features = [] }
 
 [dependencies]
-tauri = { version = "1.2", features = ["dialog-all", "shell-open"] }
-sysinfo = "0.28.2"
+tauri = { version = "1", features = ["dialog-all", "shell-open"] }
+sysinfo = "0.28"
+thiserror = "2"
+serde = "1"
 
 [profile.release]
 opt-level = 'z'     # Optimize for size
